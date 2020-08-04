@@ -1,0 +1,48 @@
+#include<iostream>
+#define max 5
+using namespace std;
+struct qtStack 
+{
+	int top;//栈顶指针，用来作为数组的下标
+	int value[max];//栈数组
+};
+void initStack(qtStack &s)//初始化
+{
+	s.top = -1;//初始化top为-1，用来判断栈是否为空
+}
+int pushStack(qtStack& s,int e)
+{
+	if (s.top >= max - 1)//判断栈是否满了
+		return 0;
+	s.top++;
+	s.value[s.top] = e;
+}
+int popStack(qtStack& s, int &e)
+{
+	if (s.top <= -1)
+		return 0;
+	e = s.value[s.top];
+	s.top--;
+}
+int isEmpty(qtStack s)
+{
+	if (s.top <= -1)
+		return 1;
+	else
+		return 0;
+}
+
+int main()
+{
+	qtStack A;
+	initStack(A);
+	cout << "请输入入栈的一串数字，用空格隔开，输出非数字代表结束：";
+	int e;
+	while (cin >> e)
+	{
+		pushStack(A, e);
+	}
+	int i;
+	popStack(A, i);
+	cout << i;
+}
